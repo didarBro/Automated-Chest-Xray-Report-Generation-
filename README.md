@@ -1,0 +1,6 @@
+![Automated Chest X-ray Report Generation](https://github.com/didarBro/Automated-Chest-Xray-Report-Generation-/blob/main/Report/AutomatedChestX_rayReportGeneration%20(1)_page-0001.jpg?raw=true)
+![Automated Chest X-ray Report Generation](https://github.com/didarBro/Automated-Chest-Xray-Report-Generation-/blob/main/Report/AutomatedChestX_rayReportGeneration%20(1)_page-0002.jpg?raw=true)
+![Automated Chest X-ray Report Generation](https://github.com/didarBro/Automated-Chest-Xray-Report-Generation-/blob/main/Report/AutomatedChestX_rayReportGeneration%20(1)_page-0003.jpg?raw=true)
+![Automated Chest X-ray Report Generation](https://github.com/didarBro/Automated-Chest-Xray-Report-Generation-/blob/main/Report/AutomatedChestX_rayReportGeneration%20(1)_page-0004.jpg?raw=true)
+![Automated Chest X-ray Report Generation](https://github.com/didarBro/Automated-Chest-Xray-Report-Generation-/blob/main/Report/AutomatedChestX_rayReportGeneration%20(1)_page-0005.jpg?raw=true)
+![Automated Chest X-ray Report Generation](https://github.com/didarBro/Automated-Chest-Xray-Report-Generation-/blob/main/Report/AutomatedChestX_rayReportGeneration%20(1)_page-0006.jpg?raw=true)
