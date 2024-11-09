@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X-ray Report Generation</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+  <style>
+    /* Navbar Styling */
+    html,
+    body {
+      height: 100%;
+      /* Ensures that the body takes up the full height */
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .container {
+      flex: 1 0 auto;
+      /* This ensures the container grows and takes the available space */
+    }
+
+    .navbar {
+      background-color: rgb(48, 47, 46);
+      /* Darker, richer shade for the navbar */
+      width: 80%;
+      padding-left: 200px;
+      margin: 0 auto;
+      font-size: x-large;
+      color: #a2c8f1;
+      border-radius: 20px;
+      /* Light blue text for navbar items */
+    }
+
+    /* Ensure nav links take the desired color */
+    .navbar .nav-link {
+      color: #f0a500 !important;
+      /* Vibrant yellow for nav links */
+      position: relative;
+      overflow: hidden;
+      padding-bottom: 5px;
+      transition: color 0.3s ease;
+    }
+
+    /* Hover Effect for Links */
+    .navbar .nav-link:hover {
+      color: #f8f9fa !important;
+      /* Light text color on hover */
+      transform: translateY(-2px);
+      /* Slight upward movement on hover */
+      text-shadow: 0 2px 5px rgba(240, 165, 0, 0.6);
+      /* Yellow glow effect */
+      transition: transform 0.2s ease-in-out;
+    }
+
+    /* Underline Effect on Hover */
+    .navbar .nav-link::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: #f0a500;
+      /* Same yellow as nav-link for underline */
+      bottom: 0;
+      left: -100%;
+      transition: left 0.4s ease;
+    }
+
+    .navbar .nav-link:hover::before {
+      left: 0;
+    }
+
+    /* Search Button */
+    .search-btn {
+      color: #fff !important;
+      /* White text for the search button */
+      background-color: #f0a500;
+      /* Vibrant yellow for the button */
+      border-color: #f0a500;
+    }
+
+    .search-btn:hover {
+      background-color: #d68b00;
+      /* Darker shade of yellow for hover */
+    }
+
+    /* Image Box */
+    .image-box {
+      border: 2px solid #dee2e6;
+      /* Light gray border */
+      height: 300px;
+      width: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* Image Box Hover Effect */
+    .image-box:hover {
+      transform: scale(1.05);
+      /* Slight zoom-in on hover */
+      box-shadow: 0px 5px 15px rgba(48, 47, 46, 0.3);
+      /* Darker shadow effect */
+    }
+
+    .image-box img {
+      max-height: 100%;
+      max-width: 100%;
+      transition: opacity 0.3s ease;
+    }
+
+    .image-box:hover img {
+      opacity: 0.9;
+      /* Slight opacity change on hover */
+    }
+
+    /* Report Box */
+    .report-box {
+      border: 2px solid #dee2e6;
+      /* Light gray border */
+      padding: 15px;
+      background-color: #f8f9fa;
+      /* Light background */
+      height: 300px;
+      /* Match height with the image box */
+      width: 800px;
+      /* Double the width of the image box */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .report-box p {
+      margin: 0;
+      font-size: 16px;
+      color: #343a40;
+      /* Dark gray for text */
+      transition: color 0.3s ease;
+    }
+
+    /* Footer Styling */
+    footer {
+      background-color: #343a40;
+      /* Darker gray for footer */
+      padding: 20px 0;
+      color: #dee2e6 !important;
+      /* Lighter gray for footer text */
+      flex-shrink: 0;
+      /* Prevents the footer from shrinking */
+      text-align: center;
+      border-radius: 40px; 
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    /* Spinner and Loading Message */
+    .spinner-border {
+      display: none;
+    }
+
+    .loading-message {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Dark Mode Navigation bar with search -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Project Details</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn search-btn" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main content -->
+  <div class="container mt-4">
+    <h1 class="text-center">Generate X-ray Report</h1>
+
+    <!-- Loading spinner and message -->
+    <div class="text-center mt-4">
+      <div class="spinner-border text-primary" role="status" id="loading-spinner">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="loading-message">
+        <p class="text-primary">Please wait, the report is being generated...</p>
+      </div>
+    </div>
+
+    <!-- Form to upload image -->
+    <form method="POST" enctype="multipart/form-data" class="text-center mt-4" id="upload-form">
+      {% csrf_token %}
+      <input type="file" name="image" class="form-control mb-3" accept="image/*" required>
+      <button type="submit" class="btn btn-primary">Generate Report</button>
+    </form>
+
+    <!-- Display uploaded image and generated report -->
+    <div class="row mt-4">
+      <div class="col-md-6 text-center">
+        {% if image_url %}
+        <h4 style="text-align: left;">Uploaded Image:</h4>
+        <div class="image-box">
+          <img src="{{ image_url }}" alt="Uploaded Image">
+        </div>
+        {% endif %}
+      </div>
+      <div class="col-md-6">
+        {% if report %}
+        <h4>Generated Report:</h4>
+        <div class="report-box">
+          <p>{{ report }}</p>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer mt-auto py-3">
+    <div class="container text-center">
+      <span class="text-muted">&copy; 2024 Chest X-ray Report Generator</span>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Show loading spinner when the form is submitted
+    document.getElementById('upload-form').addEventListener('submit', function () {
+      document.getElementById('loading-spinner').style.display = 'inline-block';
+      document.querySelector('.loading-message').style.display = 'block';
+    });
+  </script>
+</body>
+
+</html>
